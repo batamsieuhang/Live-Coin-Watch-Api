@@ -7,11 +7,11 @@ def get_connection():
     return client['test_mongo']
 
 
-# sample connection
-db = get_connection()
+# # sample connection
+# db = get_connection()
 
-# users is a collection in db
-check = db.users
+# # users is a collection in db
+# check = db.users
 
-print(check.find_one({"name":"Tu"}))
+# print(check.find_one({"name":"Tu"}))
 
