@@ -1,22 +1,15 @@
-import requests
-import json
+from call_api import get_data
+from connect_DB import get_connection
+from convert_api import convert_api
+import time,json
 
-url = "https://http-api.livecoinwatch.com/markets"
 
-payload = json.dumps({
-    "exchange": "binance",
-    "sort": "depth",
-    "order": "descending",
-    "offset": 0,
-    "limit": 30,
-    "search": "usdt"
-})
-headers = {
-    'content-type': 'application/json',
-    'User-Agent': 'Mozilla/5.0',
-    'x-api-key': '58c9be28-962f-4177-b6a0-dec1f6968f7d'
-}
+while(True):
+    response,request_time = get_data(2)
 
-response = requests.request("GET", url, headers=headers, data=payload)
+    db = get_connection()
 
-print(response.text)
+    collection = db.page_2
+    collection.insert_one({"_id":request_time,"data":convert_api(response)})
+    print(request_time)
+    time.sleep(2)
