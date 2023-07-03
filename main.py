@@ -5,11 +5,11 @@ import time,json
 
 
 while(True):
-    response,request_time = get_data(2)
-
     db = get_connection()
-
+    response,request_time = get_data(2)
+    data, coin_name = convert_api(response)
     collection = db.page_2
-    collection.insert_one({"_id":request_time,"data":convert_api(response)})
+    collection.insert_one({"_id":request_time,"data":data})
     print(request_time)
     time.sleep(2)
+    
