@@ -1,18 +1,7 @@
-from call_api import get_data
-import json
+import sys,time
 
-
-
-
-def convert_api(response):
-    data_coin = json.loads(response.text)['data']
-    finally_data = {}
-    for data in data_coin:
-        finally_data[data['base']] = {"price":data['price'],"depth":data['depth'],"volume":data['volume']}
-    return finally_data
-
+print(sys.argv[1])
+map_time_value = {"1m": 1, "2m": 2, "3m": 3,
+                    "4m": 4, "5m": 5, "10m": 10, "15m": 15, "20m": 20,"30m":30,"1h":60,"2h":120,"4h":240,"6h":360,"12h":720,"24h":1440}
     
-
-
-# print(convert_api(get_data(1)[0]))
-
+print(map_time_value[sys.argv[1]])
