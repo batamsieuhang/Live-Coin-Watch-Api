@@ -1,7 +1,7 @@
-from call_api import get_data
-from connect_DB import get_connection
-from convert_api import convert_api
-import time,json
+from api.call_api import get_data
+from api.convert_api import convert_api
+from database.connect_DB import get_connection
+import time
 
 
 while(True):
