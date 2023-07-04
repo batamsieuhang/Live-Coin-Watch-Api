@@ -10,4 +10,4 @@ while(True):
         data, coin_name = convert_api(response)
         save_all_data(data,coin_name,request_time)
         print(request_time)
-    
+    time.sleep(5)
