@@ -8,5 +8,3 @@ def convert_api(response):
         coins[data['base']] = {"price":data['price'],"depth":data['depth'],"volume":data['volume']}
         coin_name.append(data['base'])
     return coins, coin_name
-
-    
