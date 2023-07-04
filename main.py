@@ -6,7 +6,7 @@ import time,json
 
 while(True):
     db = get_connection()
-    response,request_time = get_data(2)
+    response,request_time = get_data(1)
     data, coin_name = convert_api(response)
     collection = db.page_2
     collection.insert_one({"_id":request_time,"data":data})
