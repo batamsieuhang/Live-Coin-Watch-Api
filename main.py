@@ -10,7 +10,9 @@ while(True):
         print(response)
         try:
             data, coin_name = convert_api(response)
+            save_all_data(data,coin_name,request_time)
         except json.decoder.JSONDecodeError as err:
             continue
         print(request_time)
+        time.sleep(0.5)
     time.sleep(5)
