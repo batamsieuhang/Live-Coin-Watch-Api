@@ -1,4 +1,4 @@
-from connect_DB import get_connection
+from database.connect_DB import get_connection
 from calculate.count_gap import count
 
 import time
