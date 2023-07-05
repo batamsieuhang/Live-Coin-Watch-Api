@@ -15,5 +15,5 @@ while(True):
             continue
         print(request_time)
         time.sleep(0.1)
-    print("Wating for 15s.....")
+    print("Waiting for 15s.....")
     time.sleep(15)

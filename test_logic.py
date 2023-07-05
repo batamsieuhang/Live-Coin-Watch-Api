@@ -46,7 +46,8 @@ def get_streak(map_time):
     print("-------------------------------------NEGATIVE--------------------------------------------------")
     for i in range(0,21):
         print(sorted_data_negative[i])
-    print("\n\n\n\n\n")
+    print("-------------------------------------{time_value}--------------------------------------------------".format(time_value=map_time))
+    print("\n")
 
 
 while(True):
