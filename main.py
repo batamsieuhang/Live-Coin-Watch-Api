@@ -14,5 +14,6 @@ while(True):
         except json.decoder.JSONDecodeError as err:
             continue
         print(request_time)
-        time.sleep(0.5)
-    time.sleep(5)
+        time.sleep(0.1)
+    print("Wating for 15s.....")
+    time.sleep(15)
