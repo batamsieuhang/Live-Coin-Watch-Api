@@ -52,5 +52,5 @@ def get_streak(map_time):
 
 while(True):
     get_streak(sys.argv[1])
-    time.sleep(10)
+    time.sleep(30)
 
