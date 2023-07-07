@@ -6,20 +6,19 @@ import json,time,sys
 
 
 
-def count_per(per_limit_positive,per_limit_negative):
+def count_per(per_limit_positive,per_limit_negative,time_value):
+    map_time_value = {"1s":1,"5s":5,"10s":10,"1m": 60, "2m": 120, "3m": 180,
+                    "4m": 240, "5m": 300, "10m": 600, "15m": 900, "20m": 1200,"30m":1800,"1h":3600,"2h":7200}
     db = get_connection()
     collection = db.per_coin
     time_request_list = []
     index = 0
     for i in range(0,3):
-        print(str(i+1)+"...")
-        time.sleep(1)
-    for i in range(0,3):
         data = {}
         request_time = time.time()
         time_request_list.append(request_time)
         if (index == 0):
-                print("Wating for 2 min...") 
+                print("Waiting for {time_show} ...".format(time_show=time_value)) 
         for i in range(1,11):
             response= get_data(i)[0]
             try:
@@ -63,12 +62,16 @@ def count_per(per_limit_positive,per_limit_negative):
                     continue
             print("---------------------------------LAP2--------------END---------------------------------")
         index+=1
-        print("Waiting for 1 minute...")
-        time.sleep(40) 
+        if (index ==1 or index ==2):
+            print("Waiting for {time_show} ...".format(time_show=time_value))
+            time.sleep(map_time_value[time_value])
 
-     
+
+for i in range(0,3):
+        print(str(i+1)+"...")
+        time.sleep(1)   
 while(True):
-    count_per(float(sys.argv[1]),float(sys.argv[2]))
+    count_per(float(sys.argv[1]),float(sys.argv[2]),sys.argv[3])
 
         
         
