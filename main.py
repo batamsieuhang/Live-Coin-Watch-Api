@@ -14,6 +14,6 @@ while(True):
         except json.decoder.JSONDecodeError as err:
             continue
         print(request_time)
-        time.sleep(0.1)
+        time.sleep(1)
     print("Waiting for 30s.....")
-    time.sleep(30)
+    time.sleep(15)
