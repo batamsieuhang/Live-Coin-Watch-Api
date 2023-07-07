@@ -39,7 +39,7 @@ def get_streak(map_time):
         final_result.append(count(coin_data,coin['name']))
     sorted_data_positive = sorted(final_result, key=lambda x: x[list(x.keys())[0]]['streak_positive'], reverse=True)
     sorted_data_negative = sorted(final_result, key=lambda x: x[list(x.keys())[0]]['streak_negative'], reverse=True)
-    print("-------------------------------------POSITVE--------------------------------------------------")
+    print("-------------------------------------positive--------------------------------------------------")
     for i in range(0,21):
         print(sorted_data_positive[i])
     print("\n")
