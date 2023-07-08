@@ -65,6 +65,9 @@ def count_per(per_limit_positive,per_limit_negative,time_value):
         if (index ==1 or index ==2):
             print("Waiting for {time_show} ...".format(time_show=time_value))
             time.sleep(map_time_value[time_value])
+        elif(index ==3):
+            print("Waiting for 30s ...")
+            time.sleep(30)
 
 
 for i in range(0,3):
