@@ -8,7 +8,7 @@ import json,time,sys
 
 def count_per(per_limit_positive,per_limit_negative,time_value):
     map_time_value = {"1s":1,"5s":5,"10s":10,"20s":20,"30s":30,"1m": 60, "2m": 120, "3m": 180,
-                    "4m": 240, "5m": 300, "10m": 600, "15m": 900, "20m": 1200,"30m":1800,"1h":3600,"2h":7200}
+                    "4m": 240, "5m": 300, "10m": 600, "15m": 900, "20m": 1200,"30m":1800,"1h":3600,"2h":7200,"3h":10800,"4h":14400,"6h":21600,"12h":43200}
     db = get_connection()
     collection = db.per_coin
     time_request_list = []
