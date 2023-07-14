@@ -32,14 +32,15 @@ def count_per(per_limit_positive,per_limit_negative,time_value):
             negative, positive = get_per(time_request_list[0:2])
             for coin in negative:
                 try:
-                    if abs(coin[1]["negative"]) >  per_limit_negative:
+                    if abs(coin[1]["negative"]) >=  per_limit_negative:
+
                         print(coin)
                 except KeyError:
                     continue
             print("---------------------------------LAP1--------------POSITIVE---------------------------------")
             for coin in positive:
                 try:
-                    if coin[1]["positive"] >  per_limit_positive:
+                    if coin[1]["positive"] >=  per_limit_positive:
                         print(coin)
                 except KeyError:
                     continue
@@ -49,14 +50,14 @@ def count_per(per_limit_positive,per_limit_negative,time_value):
             negative, positive = get_per(time_request_list[1:3])
             for coin in negative:
                 try:
-                    if abs(coin[1]["negative"]) >  per_limit_negative:
+                    if abs(coin[1]["negative"]) >=  per_limit_negative:
                         print(coin)
                 except KeyError:
                     continue
             print("---------------------------------LAP2--------------POSITIVE---------------------------------")
             for coin in positive:
                 try:
-                    if abs(coin[1]["positive"]) >  per_limit_positive:
+                    if abs(coin[1]["positive"]) >=  per_limit_positive:
                         print(coin)
                 except KeyError:
                     continue
@@ -65,13 +66,18 @@ def count_per(per_limit_positive,per_limit_negative,time_value):
         if (index ==1 or index ==2):
             print("Waiting for {time_show} ...".format(time_show=time_value))
             time.sleep(map_time_value[time_value])
+        elif(index ==3):
+            print("Waiting for 30s ...")
+            time.sleep(30)
 
+
+count_collection = {}
 
 for i in range(0,3):
         print(str(i+1)+"...")
         time.sleep(1)   
 while(True):
-    count_per(float(sys.argv[1]),float(sys.argv[2]),sys.argv[3])
+    count_per(float(sys.argv[1]),float(sys.argv[2]),sys.argv[3],count_collection)
 
         
         
