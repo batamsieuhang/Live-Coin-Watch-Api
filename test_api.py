@@ -1,7 +1,58 @@
-import sys,time
+import requests,json
+url = "https://graphql.coincap.io/"
 
-print(sys.argv[1])
-map_time_value = {"1m": 1, "2m": 2, "3m": 3,
-                    "4m": 4, "5m": 5, "10m": 10, "15m": 15, "20m": 20,"30m":30,"1h":60,"2h":120,"4h":240,"6h":360,"12h":720,"24h":1440}
-    
-print(map_time_value[sys.argv[1]])
+payload = {
+    "query": """
+        query ($id: ID!, $direction: SortDirection, $first: Int!, $sort: ExchangeMarketSortInput) {
+            exchange(id: $id) {
+                id
+                subscription
+                __typename
+            }
+            exchangeMarkets(
+                exchangeId: $id
+                direction: $direction
+                first: $first
+                sort: $sort
+            ) {
+                pageInfo {
+                    hasNextPage
+                    __typename
+                }
+                edges {
+                    node {
+                        id
+                        baseSymbol
+                        exchangeId
+                        baseId
+                        quoteSymbol
+                        quoteId
+                        rate
+                        priceUsd
+                        tradesCount24Hr
+                        volumeUsd24Hr
+                        percentExchangeVolume
+                        updatedAt
+                        __typename
+                    }
+                    __typename
+                }
+                __typename
+            }
+        }
+    """,
+    "variables": {
+        "id": "binance",
+        "direction": "DESC",
+        "first": 10,
+        "sort": "volumeUsd24Hr"
+    }
+}
+
+headers = {
+        'content-type': 'application/json',
+        'User-Agent': 'Mozilla/5.0'
+    }
+
+response = requests.post(url, json=payload,headers=headers)
+print(json.loads(response.text)['data']['exchangeMarkets']['edges'][0]['node']['quoteSymbol'])
