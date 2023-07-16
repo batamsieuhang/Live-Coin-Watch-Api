@@ -5,15 +5,13 @@ import time,json
 
 
 while(True):
-    for i in range(1,11):
-        response,request_time = get_data(i)
-        print(response)
-        try:
-            data, coin_name = convert_api(response)
-            save_all_data(data,coin_name,request_time)
-        except json.decoder.JSONDecodeError as err:
-            continue
-        print(request_time)
-        time.sleep(2)
-    print("Waiting for 30s.....")
+    response,request_time = get_data()
+    print(response)
+    try:
+        data, coin_name = convert_api(response)
+        save_all_data(data,coin_name,request_time)
+    except json.decoder.JSONDecodeError as err:
+        continue
+    print(request_time)
+    print("Waiting for 15s.....")
     time.sleep(15)
