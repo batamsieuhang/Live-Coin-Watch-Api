@@ -20,7 +20,7 @@ def count_per(per_limit_positive,per_limit_negative,time_value):
         if (index == 0):
                 print("Waiting for {time_show} ...".format(time_show=time_value)) 
         for i in range(1,11):
-            response= get_data(i)[0]
+            response= get_data()[0]
             try:
                 update_coin, coin_name = convert_api(response)
                 data.update(update_coin)
