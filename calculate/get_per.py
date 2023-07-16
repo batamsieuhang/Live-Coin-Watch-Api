@@ -22,7 +22,7 @@ def get_per(time_request):
     for coin in coins:    
         try:
             dict_price_coin[coin["name"]] = {}
-            per_cal = (data[1][coin["name"]]["volume"]/data[0][coin["name"]]["volume"]-1)*100
+            per_cal = (float(data[1][coin["name"]]["volume"])/float(data[0][coin["name"]]["volume"])-1)*100
             if(per_cal > 0):
                 dict_price_coin[coin["name"]]["positive"] = per_cal
                 dict_price_coin[coin["name"]]["negative"] = 0
