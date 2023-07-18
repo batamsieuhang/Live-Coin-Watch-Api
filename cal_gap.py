@@ -28,7 +28,7 @@ def count_per(per_limit_positive,per_limit_negative,time_value):
                 continue
         collection.insert_one({"_id":request_time,"data":data})
         if (index==1):
-            print("---------------------------------LAP1-----------NEGATIVE-----------------------------------")
+            print("---------------------------------LAP1-----------NEGATIVE-cal_gap----------------------------------")
             negative, positive = get_per(time_request_list[0:2])
             for coin in negative:
                 try:
@@ -36,7 +36,7 @@ def count_per(per_limit_positive,per_limit_negative,time_value):
                         print(coin)
                 except KeyError:
                     continue
-            print("---------------------------------LAP1--------------POSITIVE---------------------------------")
+            print("---------------------------------LAP1--------------POSITIVE-cal_gap--------------------------------")
             for coin in positive:
                 try:
                     if coin[1]["positive"] >  per_limit_positive:
@@ -45,7 +45,7 @@ def count_per(per_limit_positive,per_limit_negative,time_value):
                     continue
             print("---------------------------------LAP1--------------END---------------------------------")
         if (index==2):
-            print("---------------------------------LAP2-----------NEGATIVE-----------------------------------")
+            print("---------------------------------LAP2-----------NEGATIVE-cal_gap----------------------------------")
             negative, positive = get_per(time_request_list[1:3])
             for coin in negative:
                 try:
@@ -53,7 +53,7 @@ def count_per(per_limit_positive,per_limit_negative,time_value):
                         print(coin)
                 except KeyError:
                     continue
-            print("---------------------------------LAP2--------------POSITIVE---------------------------------")
+            print("---------------------------------LAP2--------------POSITIVE-cal_gap--------------------------------")
             for coin in positive:
                 try:
                     if abs(coin[1]["positive"]) >  per_limit_positive:
