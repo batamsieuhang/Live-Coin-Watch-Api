@@ -1,4 +1,4 @@
 live-api/
-
+virtualenv_name/
 .env
 __pycache__/
