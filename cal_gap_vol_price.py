@@ -1,7 +1,7 @@
 from api.call_api import get_data
 from api.convert_api import convert_api
 from database.connect_DB import get_connection
-from calculate.get_per import get_per
+from calculate.get_per_price_vol import get_per_vol_price
 import json,time,sys
 
 
@@ -28,15 +28,15 @@ def count_per(per_limit_positive,per_limit_negative,time_value):
                 continue
         collection.insert_one({"_id":request_time,"data":data})
         if (index==1):
-            print("---------------------------------LAP1-----------NEGATIVE-cal_gap----------------------------------")
-            negative, positive = get_per(time_request_list[0:2])
+            print("---------------------------------LAP1-----------NEGATIVE-cal_gap_vol_price----------------------------------")
+            negative, positive = get_per_vol_price(time_request_list[0:2])
             for coin in negative:
                 try:
                     if abs(coin[1]["negative"]) >  per_limit_negative:
                         print(coin)
                 except KeyError:
                     continue
-            print("---------------------------------LAP1--------------POSITIVE-cal_gap--------------------------------")
+            print("---------------------------------LAP1--------------POSITIVE-cal_gap_vol_price--------------------------------")
             for coin in positive:
                 try:
                     if coin[1]["positive"] >  per_limit_positive:
@@ -45,15 +45,15 @@ def count_per(per_limit_positive,per_limit_negative,time_value):
                     continue
             print("---------------------------------LAP1--------------END---------------------------------")
         if (index==2):
-            print("---------------------------------LAP2-----------NEGATIVE-cal_gap----------------------------------")
-            negative, positive = get_per(time_request_list[1:3])
+            print("---------------------------------LAP2-----------NEGATIVE-cal_gap_vol_price----------------------------------")
+            negative, positive = get_per_vol_price(time_request_list[1:3])
             for coin in negative:
                 try:
                     if abs(coin[1]["negative"]) >  per_limit_negative:
                         print(coin)
                 except KeyError:
                     continue
-            print("---------------------------------LAP2--------------POSITIVE-cal_gap--------------------------------")
+            print("---------------------------------LAP2--------------POSITIVE-cal_gap_vol_price--------------------------------")
             for coin in positive:
                 try:
                     if abs(coin[1]["positive"]) >  per_limit_positive:

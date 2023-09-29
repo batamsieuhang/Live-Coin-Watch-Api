@@ -2,7 +2,7 @@ from database.connect_DB import get_connection
 
 
 
-def get_per(time_request):
+def get_per_vol_price(time_request):
     
     db = get_connection()
     collection = db.per_coin
@@ -22,7 +22,9 @@ def get_per(time_request):
     for coin in coins:    
         try:
             dict_price_coin[coin["name"]] = {}
-            per_cal = (float(data[1][coin["name"]]["volume"])/float(data[0][coin["name"]]["volume"])-1)*100
+            after_vol_price=float(data[1][coin["name"]]["volume"])/float(data[1][coin["name"]]["price"])
+            pre_vol_price = float(data[0][coin["name"]]["volume"])/float(data[0][coin["name"]]["price"])
+            per_cal = (after_vol_price/pre_vol_price-1)*100
             if(per_cal > 0):
                 dict_price_coin[coin["name"]]["positive"] = per_cal
                 dict_price_coin[coin["name"]]["negative"] = 0
