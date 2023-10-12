@@ -2,7 +2,7 @@ from database.connect_DB import get_connection
 
 
 
-def get_per_vol_price(time_request):
+def get_per_vol_price(time_request,count_coin):
     
     db = get_connection()
     collection = db.per_coin
@@ -28,9 +28,11 @@ def get_per_vol_price(time_request):
             if(per_cal > 0):
                 dict_price_coin[coin["name"]]["positive"] = per_cal
                 dict_price_coin[coin["name"]]["negative"] = 0
+                count_coin[coin["name"]]["increase"] +=1
             elif(per_cal < 0):
                 dict_price_coin[coin["name"]]["positive"] = 0
                 dict_price_coin[coin["name"]]["negative"] = per_cal
+                count_coin[coin["name"]]["decrease"] +=1
             else:
                 dict_price_coin[coin["name"]]["positive"] = per_cal
                 dict_price_coin[coin["name"]]["negative"] = per_cal
@@ -39,6 +41,6 @@ def get_per_vol_price(time_request):
     sorted_data_negative = sorted(dict_price_coin.items(), key=lambda x: x[1].get('negative', float('inf')))
 
     sorted_data_positive = sorted(dict_price_coin.items(), key=lambda x: x[1].get('positive', 0), reverse=True)
-    return sorted_data_negative, sorted_data_positive
+    return sorted_data_negative, sorted_data_positive,count_coin
 
 
