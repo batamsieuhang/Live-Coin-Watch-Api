@@ -69,9 +69,6 @@ def count_per(per_limit_positive,per_limit_negative,time_value):
             time.sleep(30)
 
 
-for i in range(0,3):
-        print(str(i+1)+"...")
-        time.sleep(1)   
 while(True):
     count_per(float(sys.argv[1]),float(sys.argv[2]),sys.argv[3])
 
