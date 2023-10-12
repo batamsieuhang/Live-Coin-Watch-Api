@@ -1,4 +1,5 @@
 live-api/
+coin/
 virtualenv_name/
 .env
 __pycache__/

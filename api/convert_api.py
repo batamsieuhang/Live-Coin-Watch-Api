@@ -6,6 +6,6 @@ def convert_api(response):
     coin_name = []
     for data in data_coin:
         if data['q'] == "USDT":
-            coins[data['s']] = {"price":data['c'],"depth":0,"volume":data['qv']}
+            coins[data['s']] = {"price":data['c'],"depth":0,"volume":data['qv'],"volume_v":data["v"]}
             coin_name.append(data['s'])
     return coins, coin_name

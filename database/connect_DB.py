@@ -1,7 +1,10 @@
 from pymongo import MongoClient
 from decouple import config
+import urllib.parse
 def get_connection():
-    CONNECTION_STRING = "mongodb://{username}:{password}@localhost:27017/test_mongo".format(username=config('MONGO_USER'), password=config('MONGO_PASS'))
+    username = urllib.parse.quote_plus(config('MONGO_USER'))
+    password = urllib.parse.quote_plus(config('MONGO_PASS'))
+    CONNECTION_STRING = "mongodb://{username_mongo}:{password_mongo}@localhost:27017/test_mongo".format(username_mongo=username, password_mongo=password)
     client = MongoClient(CONNECTION_STRING)
     # auto return db
     return client['test_mongo']
@@ -13,5 +16,5 @@ def get_connection():
 # # users is a collection in db
 # check = db.users
 
-# print(check.find_one({"name":"Tu"}))
+# print(check.find_one({"name":"Tu"}))sd
 
