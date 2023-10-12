@@ -19,13 +19,12 @@ def count_per(per_limit_positive,per_limit_negative,time_value):
         time_request_list.append(request_time)
         if (index == 0):
                 print("Waiting for {time_show} ...".format(time_show=time_value)) 
-        for i in range(1,11):
-            response= get_data()[0]
-            try:
-                update_coin, coin_name = convert_api(response)
-                data.update(update_coin)
-            except json.decoder.JSONDecodeError as err:
-                continue
+        response= get_data()[0]
+        try:
+            update_coin, coin_name = convert_api(response)
+            data.update(update_coin)
+        except json.decoder.JSONDecodeError as err:
+            continue
         collection.insert_one({"_id":request_time,"data":data})
         if (index==1):
             print("---------------------------------LAP1-----------NEGATIVE-cal_gap_vol_price----------------------------------")
