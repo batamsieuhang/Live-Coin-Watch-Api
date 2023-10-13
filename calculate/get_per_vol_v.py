@@ -26,10 +26,14 @@ def get_per_vol_price(time_request,count_coin):
                 dict_price_coin[coin["name"]]["positive"] = per_cal
                 dict_price_coin[coin["name"]]["negative"] = 0
                 count_coin[coin["name"]]["increase"] +=1
+                count_coin[coin["name"]]["streak_decrease"] = 0
+                count_coin[coin["name"]]["streak_increase"] +=1
             elif(per_cal < 0):
                 dict_price_coin[coin["name"]]["positive"] = 0
                 dict_price_coin[coin["name"]]["negative"] = per_cal
                 count_coin[coin["name"]]["decrease"] +=1
+                count_coin[coin["name"]]["streak_decrease"] += 1
+                count_coin[coin["name"]]["streak_increase"] =0
             else:
                 dict_price_coin[coin["name"]]["positive"] = per_cal
                 dict_price_coin[coin["name"]]["negative"] = per_cal
