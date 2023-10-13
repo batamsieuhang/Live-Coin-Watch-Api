@@ -20,6 +20,9 @@ def cal_gap(per_limit_positive,per_limit_negative,time_value):
         count_coin[coin["name"]] = {}
         count_coin[coin["name"]]["increase"] = 0
         count_coin[coin["name"]]["decrease"] = 0
+        count_coin[coin["name"]]["streak_decrease"] = 0
+        count_coin[coin["name"]]["streak_increase"] = 0
+
     while(True):
         data = {}
         request_time = time.time()
@@ -44,14 +47,14 @@ def cal_gap(per_limit_positive,per_limit_negative,time_value):
             for coin in negative:
                 try:
                     if abs(coin[1]["negative"]) >  per_limit_negative:
-                        print(coin," so lan giam: ",count_coin[coin[0]]["decrease"])
+                        print(coin," so lan giam: ",count_coin[coin[0]]["decrease"]," chuoi giam: ",count_coin[coin[0]]["streak_decrease"])
                 except KeyError:
                     continue
             print("-----------------------------------------------POSITIVE-cal_gap_vol_price--------------------------------")
             for coin in positive:
                 try:
                     if coin[1]["positive"] >  per_limit_positive:
-                        print(coin," so lan tang: ",count_coin[coin[0]]["increase"])
+                        print(coin," so lan tang: ",count_coin[coin[0]]["increase"]," chuoi tang: ", count_coin[coin[0]]["streak_increase"])
                 except KeyError:
                     continue
         print("Waiting for {time_show} ...".format(time_show=time_value))
