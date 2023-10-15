@@ -1,10 +1,10 @@
 from database.connect_DB import get_connection
 from api.call_api import get_data
 from api.convert_api import convert_api
-from calculate.get_per_vol_v import get_per_vol_price
+from calculate.get_per import get_per_vol_price
 import time,sys,json
 
-def cal_gap(per_limit_positive,per_limit_negative,time_value):
+def cal_gap(value,per_limit_positive,per_limit_negative,time_value):
     map_time_value = {"1s":1,"5s":5,"10s":10,"20s":20,"30s":30,"1m": 60, "2m": 120, "3m": 180,
                     "4m": 240, "5m": 300, "10m": 600, "15m": 900, "20m": 1200,"30m":1800,"1h":3600,"2h":7200,"3h":10800,"4h":14400,"6h":21600,"12h":43200,"24h":86400}
     db = get_connection()
@@ -41,8 +41,8 @@ def cal_gap(per_limit_positive,per_limit_negative,time_value):
             continue
         else:
             time_after=request_time
-            negative, positive,count_coin = get_per_vol_price([time_pre,time_after],count_coin)
-            print("--------------------------------------------NEGATIVE-cal_gap_vol_price----------------------------------")
+            negative, positive,count_coin = get_per_vol_price([time_pre,time_after],value,count_coin)
+            print("--------------------------------------------NEGATIVE-{cal_gap_vol_price}----------------------------------".format(cal_gap_vol_price='time: '+time_value+", value: "+value))
             
             for coin in negative:
                 try:
@@ -50,7 +50,7 @@ def cal_gap(per_limit_positive,per_limit_negative,time_value):
                         print(coin," so lan giam: ",count_coin[coin[0]]["decrease"]," chuoi giam: ",count_coin[coin[0]]["streak_decrease"])
                 except KeyError:
                     continue
-            print("-----------------------------------------------POSITIVE-cal_gap_vol_price--------------------------------")
+            print("-----------------------------------------------POSITIVE-{cal_gap_vol_price}--------------------------------".format(cal_gap_vol_price='time: '+time_value+", value: "+value))
             for coin in positive:
                 try:
                     if coin[1]["positive"] >  per_limit_positive:
@@ -62,4 +62,4 @@ def cal_gap(per_limit_positive,per_limit_negative,time_value):
 
         time.sleep(map_time_value[time_value])
 
-cal_gap(float(sys.argv[1]),float(sys.argv[2]),sys.argv[3])
+cal_gap(sys.argv[1],float(sys.argv[2]),float(sys.argv[3]),sys.argv[4])
