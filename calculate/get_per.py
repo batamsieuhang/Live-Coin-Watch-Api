@@ -1,8 +1,6 @@
 from database.connect_DB import get_connection
 
-
-
-def get_per(time_request):
+def get_per_vol_price(time_request,value,count_coin):
     
     db = get_connection()
     collection = db.per_coin
@@ -22,13 +20,28 @@ def get_per(time_request):
     for coin in coins:    
         try:
             dict_price_coin[coin["name"]] = {}
-            per_cal = (float(data[1][coin["name"]]["volume"])/float(data[0][coin["name"]]["volume"])-1)*100
+            if value == "usdt":
+                after_vol_price=float(data[1][coin["name"]]["volume"])
+                pre_vol_price = float(data[0][coin["name"]]["volume"])
+            elif value == "coin":
+                after_vol_price=float(data[1][coin["name"]]["volume_v"])
+                pre_vol_price = float(data[0][coin["name"]]["volume_v"])
+            elif value =="usdtprice":
+                after_vol_price=float(data[1][coin["name"]]["volume"])/float(data[1][coin["name"]]["price"])
+                pre_vol_price = float(data[0][coin["name"]]["volume"])/float(data[0][coin["name"]]["price"])
+            per_cal = (after_vol_price/pre_vol_price-1)*100
             if(per_cal > 0):
                 dict_price_coin[coin["name"]]["positive"] = per_cal
                 dict_price_coin[coin["name"]]["negative"] = 0
+                count_coin[coin["name"]]["increase"] +=1
+                count_coin[coin["name"]]["streak_decrease"] = 0
+                count_coin[coin["name"]]["streak_increase"] +=1
             elif(per_cal < 0):
                 dict_price_coin[coin["name"]]["positive"] = 0
                 dict_price_coin[coin["name"]]["negative"] = per_cal
+                count_coin[coin["name"]]["decrease"] +=1
+                count_coin[coin["name"]]["streak_decrease"] += 1
+                count_coin[coin["name"]]["streak_increase"] =0
             else:
                 dict_price_coin[coin["name"]]["positive"] = per_cal
                 dict_price_coin[coin["name"]]["negative"] = per_cal
@@ -37,6 +50,6 @@ def get_per(time_request):
     sorted_data_negative = sorted(dict_price_coin.items(), key=lambda x: x[1].get('negative', float('inf')))
 
     sorted_data_positive = sorted(dict_price_coin.items(), key=lambda x: x[1].get('positive', 0), reverse=True)
-    return sorted_data_negative, sorted_data_positive
+    return sorted_data_negative, sorted_data_positive,count_coin
 
 
